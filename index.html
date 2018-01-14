@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My Awesome Presentation</title>
+<title>A short summary about #Meltdown and #Spectre</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <style type="text/css">
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -119,26 +119,541 @@ code {
 <body>
 <textarea id="source">
 
-class: center, middle
-
-# My Awesome Presentation
+layout: true
+class: center, middle, inverse
+---
+# A short summary about #Meltdown and #Spectre
 
 ???
 
-Notes for the _first_ slide!
+- Es wird viel geschrieben
+
+- Halbwahrheiten
+
+- auch voneinander ab
+
+- Es fällt schwer den Überblick zu behalten
 
 ---
+name: Meltdown
+layout: false
+.left-column[
+## What is this all about?
+]
+.right-column[
 
-# Agenda
+<p style="text-align:center;margin: auto;"><a href="https://de.wikipedia.org/wiki/Meltdown_%28Sicherheitsl%C3%BCcke%29"><img src="https://meltdownattack.com/meltdown-text.png" height="400" /></a></p>
+]
 
-1. Introduction
-2. Deep-dive
-3. ...
+???
 
-[NOTE]: Note that you need remark.js alongside this html file, but no internet connection.
+- mehrere (gleichartige) Sicherheitsprobleme => 3
+
+- Eine davon: Meltdown
+
 ---
+name: Spectre
+layout: false
+.left-column[
+## What is this all about?
+]
+.right-column[
 
-# Introduction
+<p style="text-align:center;margin: auto;"><a href="https://de.wikipedia.org/wiki/Spectre_%28Sicherheitsl%C3%BCcke%29"><img src="https://spectreattack.com/spectre-text.png" height="400" /></a></p>
+]
+
+???
+
+- 2 weitere zusammengefasst: Spectre
+
+---
+layout: true
+class: center, middle, inverse
+---
+# What is this all about?
+
+## Information Leak via speculative execution side channel attacks
+
+???
+
+- Worum geht es im Grunde?
+
+---
+# What is this all about?
+
+## [Information Leak](https://en.wikipedia.org/wiki/Information_leakage) via [speculative execution](https://de.wikipedia.org/wiki/Speculative_execution) side channel attacks
+
+
+???
+
+- steht im Grunde alles drin
+
+- Informationsabfluss
+
+- Spekulative Ausführung => näher darauf eingehen
+
+---
+name: About
+layout: false
+.left-column[
+## What is this all about?
+]
+.right-column[
+Darum geht es im Kern bei den gefundenen Problemen:
+
+- Programme können auf Speicherbereiche auf einem System zugreifen, auf welche kein Zugriff möglich sein sollte
+
+- Ursache ist nicht Betriebssystem oder installierte Software
+
+- bestimmte Prozessoren/CPUs, der letzten 10 Jahre oder teilweise noch älter betroffen
+]
+---
+name: About
+layout: false
+.left-column[
+## What is this all about?
+### Reading Memory
+]
+.right-column[
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L1N1P2zxaZE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+]
+---
+name: About
+layout: false
+.left-column[
+## What is this all about?
+### Reading Passwords
+]
+.right-column[
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RbHbFkh6eeE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+]
+---
+layout: true
+class: center, middle, inverse
+---
+# How big is this?
+
+## When infrastructure and your toaster went out of control
+
+???
+
+- Prozessoren sind das Problem
+
+- Welche betroffen?
+
+- Wie betrifft das jetzt uns?
+
+---
+name: Size
+layout: false
+.left-column[
+## How big is this?
+]
+.right-column[
+### Meltdown
+
+- Intel-x86-Prozessoren und ARM-Cortex-A75 
+]
+
+???
+
+- Also alle Rechner, die da so rumstehen.
+
+- PC, Mac.
+
+- Wer hat ältere Rechner noch in Verwendung? > 10 Jahre
+
+- .red.bold[Und jetzt wird es noch schlimmer!]
+---
+name: Size
+layout: false
+.left-column[
+## How big is this?
+]
+.right-column[
+### Meltdown
+
+- Intel-x86-Prozessoren und ARM-Cortex-A75
+
+### Spectre
+
+- alle Prozessoren die Speculative execution unterstützen
+
+- genaue Umfang noch unklar, aber vermutlich viele der letzten 25 bis 30 Jahre
+
+- z.B. Hersteller: AMD, Apple, ARM, IBM, Intel, Nvidia, NXP, Qualcomm
+]
+
+???
+
+- jetzt ist wirklich .red.bold[jede relevante Plattform] betroffen
+
+- auch Chips in Handies, Tables, Storages
+
+- Raspberry Pi aber z.B. nicht betroffen.
+
+Gute Erklärung unter https://www.raspberrypi.org/blog/why-raspberry-pi-isnt-vulnerable-to-spectre-or-meltdown/
+---
+layout: true
+class: center, middle, inverse
+---
+# Mitigation
+
+## Was tun?
+---
+name: Mitigation
+layout: false
+.left-column[
+## Mitigation
+### - Meltdown
+]
+.right-column[
+Massnahmen:
+
+- Verwendung von nicht betroffenen CPUs (haha)
+
+- Anwendung von Betriebssystemaktualisierungen, welche Work-Around beinhalten
+]
+
+???
+
+- Es gibt mehrere Probleme => Meltdown
+
+- Work-Arounds signifikante Auswirkung auf Geschwindigkeit Gesamtsystems
+
+---
+name: Mitigation
+layout: false
+.left-column[
+## Mitigation
+### - Meltdown
+### - Spectre
+]
+.right-column[
+Massnahmen:
+
+- Verwendung von nicht betroffenen CPUs (haha)
+
+- Anwendung von Betriebssystemaktualisierungen, welche Work-Around beinhalten
+
+- Aktualisierung von BIOS/Microcode
+
+- Aktualisierung [Browser](https://gist.github.com/waja/b76931dd46fb9a3581e17ddd3727a33a#browsers)
+  - Chrome: "besserer Trennung der Tabs"
+  - Alle anderen reduzieren Genauigkeit der Zeitauflösung 
+
+- Verwendung von Addblocker und Blockierung JavaScript
+]
+
+???
+
+- Wann sind BIOS-Updates verfügbar?
+
+  - Sind sie es überhaupt?
+
+  -  Wie mache ich mich schlau?
+
+- [Site Isolations](http://www.chromium.org/Home/chromium-security/site-isolation) in Chrome(ium)
+
+  - Issues und verringer signifikant die Geschwindigkeit und erhöhen Speicherverbrauch. 
+
+- Passwort-Manager im Browser?!? [Automatisches Ausfüllen](https://blog.gpunktschmitz.de/381-firefox-automatisches-fuellen-von-login-forms-deaktivieren) verhindern?!?
+
+- Passwort-Manager im Allgemeinen? Diebstahl der Passworte vs. Länge und Stärke und Einmaligkeit der Credentials pro Dienst
+
+---
+layout: true
+class: center, middle, inverse
+---
+# Mitigation Impact
+
+<img src="https://lh6.googleusercontent.com/MwzsHRXQLVbmJ3pusNuGwn0ZQVjo9h8nRJHJhIo4d3XFqbvUYCj8EPq5jV7zeVEEcHAkraNBesbbNDW_UAlIjvw-hZBd80rKt7ZYl35nBIcfCCVyRvW5V7M7KVejv9tvVBHfgSKr" height="300" />
+???
+
+- meisten Massnahmen zu Lasten Geschwindigkeit 
+---
+# Mitigation Impact
+
+<img src="https://pbs.twimg.com/media/DS0h-eHVoAAMfjh.jpg" height="250" />
+---
+layout: true
+class: center, middle, inverse
+---
+# Real world
+
+2nd and 3rd hand. No security researcher.
+???
+
+- Nur 2. und 3. Hand
+
+- keinen Anspruch auf Richtigkeit.
+
+- Hörensagen.
+---
+name: Real-world
+layout: false
+.left-column[
+## Real World
+### - Desktop
+]
+.right-column[
+Inwiefern bin ich betroffen:
+
+- Vermutlich begrenzte Auswirkung (selbst bezügl. JavaScript und Browser mit SharedArrayBuffer)
+
+- Gründe
+
+  - Kann schwer automatisiert werden
+
+  - Durchaus denkbar, aber manuelles Eingreifen notwendig, um Nutzen für Angreifer zu haben
+
+  - Eher Verwendung bei gezielten Angriffen, allerdings sehr langsam, vermutlich werden eher andere Wege genutzt
+]
+
+???
+
+- Stichwort: Bundestrojaner
+---
+name: Real-world
+layout: false
+.left-column[
+## Real World
+### - Desktop
+### - Providers
+]
+.right-column[
+Inwiefern bin ich betroffen:
+
+- Deutlich höheres Risiko der Ausnutzung
+
+- Virtuelle Systeme, Container, Shared Hosting
+
+- Bricht die versprochene, qualitativ hochwertige, Isolation der geteilten Resourcen
+
+- Betroffen vom einfachen Webauftritt bis zur Nutzung virtueller Cluster 
+]
+
+???
+
+- Lustigerweise kommt BSI zu ähnliche Einschätzung
+
+- https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Aktuell/Informationen/Artikel/Meltdown_Spectre_Sicherheitsluecke_10012018.html
+
+- laut Anders Fogh für Meltdown bald Malware, da funktionierender Schadcode im Netz existiert
+
+- Spectre komplizierter ausnutzbar => "sicher etwas länger dauern" bis Malware
+
+- universelle Angriff "sehr unwahrscheinlich", da sehr hocher Aufwand
+---
+layout: true
+class: center, middle, inverse
+---
+# What to do?
+
+## Don't Panic!
+(When you are not running Cloud, ISP or something like this)
+???
+
+Keine Server(-Anwendung), calm down. PC, Mac, Smartphone, Tablet ...
+
+---
+name: what-to-do
+layout: false
+.left-column[
+## What can be done (and what should)?
+]
+.right-column[
+As always:
+
+- .red.bold[Update, update, update ...]
+
+Apple:
+
+- Updates einspielen
+- Firmware/BIOS Updates auch über normale Updates distributiert
+
+Linux/Windows:
+
+- Updates einspielen
+- Firmware/BIOS Updates müssen separater Bezug bei Hersteller Systeme/Motherboard
+
+Windows:
+
+- Bei Verwendung von AV-Software werden (erstmal) keine Updates installiert, auch keine anderen
+- Sobald AV-Software kompatibel, setzt diese entsprechenden [Registry-Key](https://support.microsoft.com/en-us/help/4072699/important-information-regarding-the-windows-security-updates-released)
+- WTF?!? Das BSI hat dazu etwas [geschrieben](https://www.bsi-fuer-buerger.de/BSIFB/DE/Service/Aktuell/Informationen/Artikel/Meltdown_Spectre_Sicherheitsluecke_10012018.html), möglicherweise hilfreich
+]
+
+???
+
+---
+layout: true
+class: center, middle, inverse
+---
+# Bonus?!?
+
+---
+layout: true
+class: center, middle, inverse
+---
+# Aluhut ahead!
+
+---
+name: Aluhut
+layout: false
+.left-column[
+## Aluhut
+### - Nation-state
+]
+.right-column[
+Nothing new:
+
+- 2014 [Paper](http://www.immunityinc.com/downloads/x86leaks_old.pdf) veröffentlicht, welches Variante der Angriffstechnik beschreibt
+
+- 1995 [Paper](https://pdfs.semanticscholar.org/2209/42809262c17b6631c0f6536c91aaf7756857.pdf) veröffentlich, behandelt verschiedene Sicherheitsprobleme der x86 Architektur
+  - "This analysis is being performed under the auspices of the National Security Agency’s Trusted Product Evaluation Program (TPEP)."
+
+- NSA kennt also Design-Schwächen seit fast 25 Jahren, sicher nicht versucht sie zu nutzen
+
+- Nach Veröffentlichung der Schwachstelle, veröffetlicht Hackergruppe [ShadowBrokers](https://en.wikipedia.org/wiki/The_Shadow_Brokers) 0day exploits und behauptete sind Teil des NSA’s toolkit.
+
+- Funktionierende Exploits in Hand offensiv eingestellen "Sicherheits-Team" wäre sicher hilfreich die Speicherisolierung bei Cloud-Providern zu umgehen.
+]
+---
+layout: true
+class: center, middle, inverse
+---
+# Vendor Reactions
+
+---
+name: Vendors
+layout: false
+.left-column[
+## Vendors
+### - Past
+]
+.right-column[
+Was haben die Hersteller in der Vergangenheit getan?
+
+- Alles richtig gemacht!
+
+- Keine (öffentlichen) Angriffstechniken (Exploits)
+
+- Kosten nicht mit unnützen Behebungen und Forschung in die Höhe getrieben
+
+- Mehr Boni für Manager
+]
+
+---
+name: Vendors
+layout: false
+.left-column[
+## Vendors
+### - Past
+### - Actual
+]
+.right-column[
+
+- Brian Krzanich [verkauft](https://www.marketwatch.com/investing/stock/intc/insiders?pid=74228115) im Nov. 2017 alle Aktien, die er verkaufen konnte.
+
+- Saubere Arbeit der PR-Berater. Bisher kein Shitstorm in Richtung CPU-Hersteller.
+]
+
+???
+
+https://www.heise.de/newsticker/meldung/Kommentar-zu-Meltdown-Spectre-Chaos-statt-Kundendienst-3938140.html
+
+---
+layout: true
+class: center, middle, inverse
+---
+# Extra Bonus?!?
+
+Shared Resources
+---
+layout: true
+class: center, middle, inverse
+---
+# How to fix shared systems?
+## (Linux environment)
+---
+name: shared-resources
+layout: false
+.left-column[
+## Linux
+### - Fixes
+]
+.right-column[
+Für den Linux-Kernel existieren zwei unterschiedliche Ansätze:
+
+- [KAISER - Kernel Address Isolation to have Side-channels Efficiently Removed](https://lwn.net/Articles/738975/) [veröffentlich](https://patchwork.kernel.org/patch/9712001/) im Mai 2017
+  - wird aktuell bei allen Kernel < 4.14 hinzugefügt (patched)
+
+- [KPTI - Kernel page-table isolation](https://de.wikipedia.org/wiki/Kernel_page-table_isolation) in 4.15
+  - zurück portiert auf 4.9.75 und 4.14.11
+
+- Performance: schlecht(er)
+]
+---
+name: shared-resources
+layout: false
+.left-column[
+## Linux
+### - Fixes
+### - Probleme?
+]
+.right-column[
+Was sind die Probleme bei den Fixes?
+
+- PCID - Process Context Identifiers ist [essenziell](https://www.theregister.co.uk/2018/01/09/meltdown_spectre_slowdown/) für Abdämpfen des Performance-Impacts, will man unbedingt verwenden
+
+  - Support erst verfügbar seit [4.14](https://lwn.net/Articles/738975/) im Kernel
+
+  - vermutlich eher NICHT zurück portiert
+ 
+- Pflege und Weiterentwicklung der Mitigationstechniken
+ 
+  - Für KAISER sieht es schlecht aus.
+
+    - Code extrem unterschiedlich zu KPTI. Backports unwahrscheinlich, aufwändig und fehleranfällig
+
+    - Auch alle anderen Änderungen in diesem Code-Kontext sind hiervon betroffen
+
+    - Glaubt man [diesem Artikel auf HackerNews](https://news.ycombinator.com/item?id=16087736), haben einige Versionen von KAISER das Potential auf meltdown-affected Hardware zu neuen Sicherheitsproblemen
+]
+---
+layout: true
+class: center, middle, inverse
+---
+# So what?
+## (Ist mir doch scheiss egal?)
+---
+name: shared-resources
+layout: false
+.left-column[
+## $Firma
+### - Impact
+]
+.right-column[
+Was bedeutet das jetzt für (den Infrastruktur- und Linux-Betrieb bei) $Firma?
+
+- Debian
+
+  - Debian 9: Kernel 4.9
+  - Debian 8: Kernel 3.16
+  - Debian 7: Kernel 3.2
+
+- Ubuntu
+
+  - Ubuntu 18.04: 4.15
+  - Ubuntu 16.04: 4.4 (HWE: 4.15)
+  - Ubuntu 14.04: 3.13 (HWE: 4.4)
+
+You get the problem?
+]
 
 </textarea>
 <script src="remark/remark-latest.min.js" type="text/javascript">
